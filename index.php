@@ -23,12 +23,51 @@
 	<body>
 		<br/><br/>
 		<?php
-			if (!isset($imageURLs)){
+			if (!isset($imageURLs))
+			{
 				echo "<h2> Type a keyword to display a slideshow <br/> with random images from Pixabay.com </h2>";
-			} else {
+			} 
+			else 
+			{
 				// Display Caroussel Here
-				for ($i = 0; $i < 5; $i++)
-					echo "<img src'".$imageURLs[$i]."' width='200' >";
+		?>
+				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+				<!-- Indicators Here -->
+				<ol class="carousel-indicators">
+					<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+					<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+					<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+				</ol>
+				
+				<!-- Wrapper for Images -->
+				<div class="carousel-inner" role="listbox">
+					<?php
+						for ($i = 0; $i < 5; $i++)
+						{
+							do
+							{
+								$randomIndex = rand(0, count($imageURLs));
+							}while (!isset($imageURLs[$randomIndex]));
+						
+							echo '<div class="item ';
+							echo ($i == 0) ? "active" : "";
+							echo '"><img src="'.$imageURLs[$randomIndex].'"></div>';
+							unset($imageURLs[$randomIndex]);
+						}
+					?>
+					</div>
+					
+					<!-- Controls Here -->
+					<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+						<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a>
+					<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					</a>
+				</div>
+		<?php
 			}
 		?>
 		<!-- HTML form goes here! -->
